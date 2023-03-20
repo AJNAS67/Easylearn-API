@@ -4,11 +4,12 @@ import { UserService } from './user.service';
 import { RegisterSchema } from './user.model';
 import { UserController } from './user.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { UserSchema } from './model/user.models';
 
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Register', schema: RegisterSchema }]),
+    MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
     JwtModule.register({ secret: 'secret', signOptions: { expiresIn: '1d' } }),
 
   ],
