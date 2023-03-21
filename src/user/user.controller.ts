@@ -3,11 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 import { Request, response } from 'express';
-import {
-  userRegister,
-  userUpdate,
-  userLogin,
-} from 'src/interface/register.interface';
+import { userLogin } from 'src/interface/register.interface';
 import { User } from './model/user.models';
 
 @Controller('api')
@@ -38,8 +34,11 @@ export class UserController {
     if (!user) {
       return { message: 'Email address is not Exist', status: false };
     }
-    console.log(await bcrypt.compare(userDto.password, user.password),'llllllllllllllllllllllllooooooogggg');
-    
+    console.log(
+      await bcrypt.compare(userDto.password, user.password),
+      'llllllllllllllllllllllllooooooogggg',
+    );
+
     if (!(await bcrypt.compare(userDto.password, user.password))) {
       // throw new BadRequestException('Password is incorrect');
       return { message: 'Password is incorrect', status: false };
@@ -49,8 +48,8 @@ export class UserController {
       id: user.id,
       name: user.firstName,
     });
-    console.log(jwt,'jwt');
-    
+    console.log(jwt, 'jwt');
+
     // response.cookie('jwt', jwt);
     console.log(jwt, 'jt');
     return { message: 'Login success fully', status: true, token: jwt };
