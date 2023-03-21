@@ -12,3 +12,7 @@ export interface userUpdate {
   email: string;
   phoneNumber: number;
 }
+export interface userLogin{
+  email: string;
+  password: string;
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { userRegister, userUpdate } from 'src/interface/register.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -12,11 +12,20 @@ export class UserService {
   ) {}
 
   // register user
-  async createUser(user: User): Promise<User> {
+  async createUser(user: User): Promise<any> {
+    // try {
+    //   const newUser = new this.userModel(user);
+    //   return newUser.save();
+    // } catch (error) {
+    //   throw new BadRequestException(error.message);
+
+    // }
     try {
-      const newUser = new this.userModel(user);
-      return newUser.save();
-    } catch (error) {}
+      const newUser = await new this.userModel(user).save();
+      return { status: true };
+    } catch (error) {
+      return { status: false };
+    }
   }
 
   // async insertProduct(
@@ -45,9 +54,9 @@ export class UserService {
   //     // console.log(error.message);
   //   }
   // }
-  // async findUser(email: any) {
-  //   return this.RegisterModel.findOne(email);
-  // }
+  async findUser(email: any):Promise<any> {
+    return this.userModel.findOne(email);
+  }
   // getHello() {
   //   console.log('hello');
   // }

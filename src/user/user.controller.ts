@@ -2,8 +2,12 @@ import { Body, Controller, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
-import { Request, Response } from 'express';
-import { userRegister, userUpdate } from 'src/interface/register.interface';
+import { Request, response } from 'express';
+import {
+  userRegister,
+  userUpdate,
+  userLogin,
+} from 'src/interface/register.interface';
 import { User } from './model/user.models';
 
 @Controller('api')
@@ -15,15 +19,41 @@ export class UserController {
   @Post('register')
   async RegisterUser(@Body() userDto: User) {
     const hashedPassword = await bcrypt.hash(userDto.password, 12);
+    userDto.password = hashedPassword;
 
     const user = await this.registerService.createUser(userDto);
     console.log(user, 'user111');
-    // delete user['password'];
-    // if (user.status) {
-    //   return { message: 'Successfully Registerd', isAdded: true };
-    // } else {
-    //   return { message: 'Email alredy exist', isAdded: false };
-    // }
+    if (user.status) {
+      return { message: 'Successfully Registerd', isAdded: true };
+    } else {
+      return { message: 'Email alredy exist', isAdded: false };
+    }
+  }
+  @Post('login')
+  async userLogin(@Body() userDto: userLogin) {
+    let email = userDto.email;
+    const user = await this.registerService.findUser({ email });
+    console.log(user, 'userrrrrrrrrrr');
+
+    if (!user) {
+      return { message: 'Email address is not Exist', status: false };
+    }
+    console.log(await bcrypt.compare(userDto.password, user.password),'llllllllllllllllllllllllooooooogggg');
+    
+    if (!(await bcrypt.compare(userDto.password, user.password))) {
+      // throw new BadRequestException('Password is incorrect');
+      return { message: 'Password is incorrect', status: false };
+    }
+
+    const jwt = await this.jwtService.signAsync({
+      id: user.id,
+      name: user.firstName,
+    });
+    console.log(jwt,'jwt');
+    
+    // response.cookie('jwt', jwt);
+    console.log(jwt, 'jt');
+    return { message: 'Login success fully', status: true, token: jwt };
   }
 
   // @Post('login')
