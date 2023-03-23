@@ -43,6 +43,8 @@ export class AuthController {
   @Get('protected')
   checkAuth(@Req() req: Request) {
     const token = req.headers.authorization.split(' ')[1];
+    console.log(req.user,'req.user');
+    
     return { user: req.user, token: token };
   }
 
