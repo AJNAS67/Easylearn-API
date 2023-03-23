@@ -86,10 +86,10 @@ export class UserController {
   //   console.log(jwt, 'jt');
   //   return { message: 'Login success fully', status: true, token: jwt };
   // }
-  // @Get()
-  // async findAll(): Promise<any[]> {
-  //   return this.registerService.findAll();
-  // }
+  @Get()
+  async findAll(): Promise<any[]> {
+    return this.registerService.findAll();
+  }
   // @Put(':id')
   // async update(@Param('id') id: string, @Body() productData: userUpdate): Promise<any> {
   //   return this.registerService.update(id, productData);

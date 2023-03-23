@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from 'src/user/model/user.models';
@@ -6,17 +10,22 @@ import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
-
-
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwtService:JwtService
+    private jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string) {
-    const user = await this.userService.findOne(email);
+  async validateUser(email: any, password: any) {
+    console.log('iiiiiiiiiiiiiii');
+
+    console.log(email, 'kjhgggggggg');
+
+    const user = await this.userService.findUser({ email });
+    console.log(user, 'dfghjk');
+    // return user
+
     if (user === null) {
       throw new BadRequestException('Couldnt find user');
     } else {
@@ -29,14 +38,12 @@ export class AuthService {
     }
   }
 
-  
   login(user: any) {
     const payload = {
       email: user.email,
       _id: user._id,
-      phone: user.phone,
-      firstname: user.firstname,
-      lastname: user.lastname,
+      firstName: user.firstName,
+      lastName: user.lastName,
     };
 
     return {
@@ -44,5 +51,8 @@ export class AuthService {
       status: true,
       access_token: this.jwtService.sign(payload),
     };
+  }
+  getHello() {
+    return 'Hello';
   }
 }

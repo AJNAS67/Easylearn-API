@@ -27,6 +27,10 @@ export class UserService {
       return { status: false };
     }
   }
+  async findAll(){
+    return await this.userModel.find()
+
+  }
 
   // async insertProduct(
   //   firstName: string,
@@ -67,6 +71,9 @@ export class UserService {
   //   return this.RegisterModel.findByIdAndUpdate(id, productData, { new: true });
   // }
   async findOne(email: any) {
+    console.log(email,'emailllllllllllllllll');
+    
+    
     const user = await this.userModel.findOne(email);
     return user;
   }
