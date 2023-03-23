@@ -54,7 +54,7 @@ export class UserService {
   //     // console.log(error.message);
   //   }
   // }
-  async findUser(email: any):Promise<any> {
+  async findUser(email: any): Promise<any> {
     return this.userModel.findOne(email);
   }
   // getHello() {
@@ -66,4 +66,8 @@ export class UserService {
   // async update(id: string, productData: userUpdate): Promise<userUpdate> {
   //   return this.RegisterModel.findByIdAndUpdate(id, productData, { new: true });
   // }
+  async findOne(email: any) {
+    const user = await this.userModel.findOne(email);
+    return user;
+  }
 }

@@ -10,10 +10,12 @@ import { UserSchema } from './model/user.models';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
-    JwtModule.register({ secret: 'secret', signOptions: { expiresIn: '1d' } }),
+    // JwtModule.register({ secret: 'secret', signOptions: { expiresIn: '1d' } }),
 
   ],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
+
 })
 export class UserModule {}

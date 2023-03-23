@@ -10,7 +10,7 @@ import { User } from './model/user.models';
 export class UserController {
   constructor(
     private registerService: UserService,
-    private jwtService: JwtService,
+    // private jwtService: JwtService,
   ) {}
   @Post('register')
   async RegisterUser(@Body() userDto: User) {
@@ -44,15 +44,16 @@ export class UserController {
       return { message: 'Password is incorrect', status: false };
     }
 
-    const jwt = await this.jwtService.signAsync({
-      id: user.id,
-      name: user.firstName,
-    });
-    console.log(jwt, 'jwt');
+    // const jwt = await this.jwtService.signAsync({
+    //   id: user.id,
+    //   name: user.firstName,
+    // });
+    // console.log(jwt, 'jwt');
 
-    // response.cookie('jwt', jwt);
-    console.log(jwt, 'jt');
-    return { message: 'Login success fully', status: true, token: jwt };
+    // console.log(jwt, 'jt');
+    // return { message: 'Login success fully', status: true, token: jwt };
+    return { message: 'Login success fully', status: true };
+
   }
 
   // @Post('login')
