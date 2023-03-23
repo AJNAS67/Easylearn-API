@@ -29,4 +29,11 @@ export class ProfileService {
       throw new BadRequestException(error.message);
     }
   }
+  getUserDetails(id:string){
+    console.log(id,'id');
+    console.log(this.profileModel.find({userId:id}),'fiddddddduser');
+    
+    
+    return this.profileModel.find({userId:id})
+  }
 }

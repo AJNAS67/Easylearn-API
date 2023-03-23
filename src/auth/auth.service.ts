@@ -18,12 +18,8 @@ export class AuthService {
   ) {}
 
   async validateUser(email: any, password: any) {
-    console.log('iiiiiiiiiiiiiii');
-
-    console.log(email, 'kjhgggggggg');
-
     const user = await this.userService.findUser({ email });
-    console.log(user, 'dfghjk');
+    console.log(user, 'user');
     // return user
 
     if (user === null) {

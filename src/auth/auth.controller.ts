@@ -35,7 +35,6 @@ export class AuthController {
 
   @Post('auth/login')
   async login(@Req() req: Request) {
-    console.log(req.user,'ajnas');
     return this.authService.login(req.user);
   }
 
@@ -47,6 +46,7 @@ export class AuthController {
     
     return { user: req.user, token: token };
   }
+  
 
 
 
