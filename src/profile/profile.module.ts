@@ -3,13 +3,15 @@ import { ProfileService } from './profile.service';
 import { ProfileController } from './profile.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProfileSchema } from './model/profile.model';
+import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'profile', schema: ProfileSchema }]),
 
   ],
-  providers: [ProfileService],
+  providers: [ProfileService,CloudinaryService],
   controllers: [ProfileController]
 })
 export class ProfileModule {}
