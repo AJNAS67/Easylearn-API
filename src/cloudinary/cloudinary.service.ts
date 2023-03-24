@@ -6,13 +6,10 @@ const streamifier = require('streamifier');
 export class CloudinaryService {
   
 
-    uploadFile(file: Express.Multer.File,userId:string): Promise<CloudinaryResponse> {
+    uploadFile(file: Express.Multer.File): Promise<CloudinaryResponse> {
         return new Promise<CloudinaryResponse>((resolve, reject) => {
           const uploadStream = cloudinary.uploader.upload_stream(
             (error, result) => {
-                console.log(result,'result');
-
-                
               if (error) return reject(error);
               resolve(result);
             },

@@ -1,17 +1,32 @@
-import { Body, Controller, Get, Param, Post, Put, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Req,
+  Res,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 import { Request, response } from 'express';
 import { userLogin } from 'src/interface/register.interface';
 import { User } from './model/user.models';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 
 @Controller('api')
 export class UserController {
   constructor(
     private registerService: UserService,
-    // private jwtService: JwtService,
-  ) {}
+  ) 
+  {}
   @Post('register')
   async RegisterUser(@Body() userDto: User) {
     const hashedPassword = await bcrypt.hash(userDto.password, 12);
@@ -29,15 +44,11 @@ export class UserController {
   async userLogin(@Body() userDto: userLogin) {
     let email = userDto.email;
     const user = await this.registerService.findUser({ email });
-    console.log(user, 'userrrrrrrrrrr');
 
     if (!user) {
       return { message: 'Email address is not Exist', status: false };
     }
-    console.log(
-      await bcrypt.compare(userDto.password, user.password),
-      'llllllllllllllllllllllllooooooogggg',
-    );
+   
 
     if (!(await bcrypt.compare(userDto.password, user.password))) {
       // throw new BadRequestException('Password is incorrect');
@@ -53,39 +64,36 @@ export class UserController {
     // console.log(jwt, 'jt');
     // return { message: 'Login success fully', status: true, token: jwt };
     return { message: 'Login success fully', status: true };
-
   }
 
-  // @Post('login')
-  // async userLogin(
-  //   @Body('email') email: string,
-  //   @Body('password') password: string,
-  //   @Res({ passthrough: true }) response: Response,
-  // ) {
-  //   console.log(email,'email');
-
-  //   const user = await this.registerService.findUser({ email });
-  //   if (!user) {
-  //     console.log('no user');
-  //     return { message: 'Email address is not Exist', status: false };
-
-  //     // throw new BadRequestException('Invalid user');
-  //   }
-  //   if (!(await bcrypt.compare(password, user.password))) {
-  //     // throw new BadRequestException('Password is incorrect');
-  //     return { message: 'Password is incorrect', status: false };
-  //   }
-  //   console.log('have user');
-  //   console.log(user,'userrrrrrrrrr');
-
-  //   const jwt = await this.jwtService.signAsync({
-  //     id: user.id,
-  //     name: user.firstName,
-  //   });
-  //   response.cookie('jwt', jwt);
-  //   console.log(jwt, 'jt');
-  //   return { message: 'Login success fully', status: true, token: jwt };
+  // @UseGuards(JwtAuthGuard)
+  // @Post('upload')
+  // @UseInterceptors(FileInterceptor('file'))
+  // async uploadImage(@Req() req, @UploadedFile() file: Express.Multer.File) {
+  //   console.log(req.user, 'user');
+  //   const result=await this.cloudinaryService.uploadFile(file);
+  //   console.log(result,'result');
+    
+  //   return result
   // }
+
+  @Patch(':id/:profile_pic/:value')
+  async updateField(
+    @Param('id') id: string,
+    @Param('profile_pic') profile_pic: string,
+    @Param('value') value: any,
+  ) {
+    const updatedDoc = await this.registerService.updateField(
+      id,
+      profile_pic,
+      value,
+    );
+    console.log(updatedDoc);
+
+    return updatedDoc;
+  }
+
+  
   @Get()
   async findAll(): Promise<any[]> {
     return this.registerService.findAll();

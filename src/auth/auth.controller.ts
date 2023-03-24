@@ -32,7 +32,6 @@ export class AuthController {
 
 
   @UseGuards(LocalAuthGuard)
-
   @Post('auth/login')
   async login(@Req() req: Request) {
     return this.authService.login(req.user);
@@ -47,8 +46,6 @@ export class AuthController {
     return { user: req.user, token: token };
   }
   
-
-
 
   @Get('pro')
   async GetHello(){

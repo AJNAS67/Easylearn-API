@@ -31,6 +31,14 @@ export class UserService {
     return await this.userModel.find()
 
   }
+  async updateField(id: string, fieldToUpdate: string, newValue: any): Promise<any> {
+    const updatedDoc = await this.userModel.findByIdAndUpdate(
+      id,
+      { $set: { [fieldToUpdate]: newValue } },
+      { new: true }
+    ).exec();
+    return updatedDoc;
+  }
 
   // async insertProduct(
   //   firstName: string,
