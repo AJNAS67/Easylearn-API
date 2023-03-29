@@ -17,23 +17,19 @@ export class ProfileService {
         email: userDetals.email,
         pinCode: userDetals.pinCode,
         phoneNumber: userDetals.phoneNumber,
-        dateofBirth: userDetals.dataofBirth,
+        dateofBirth: userDetals.dateofBirth,
         state: userDetals.state,
         district: userDetals.district,
         city: userDetals.city,
         address: userDetals.address,
       });
-
-
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
-  getUserDetails(id:string){
-    console.log(id,'id');
-    console.log(this.profileModel.find({userId:id}),'fiddddddduser');
-    
-    
-    return this.profileModel.find({userId:id})
+  async getUserDetails(id: string) {
+    return await this.profileModel.find({
+      userId: new mongoose.Types.ObjectId(id),
+    });
   }
 }

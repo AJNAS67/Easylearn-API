@@ -22,7 +22,7 @@ export class Profile {
   phoneNumber: number;
 
   @Prop()
-  dataofBirth: string;
+  dateofBirth: string;
 
   @Prop()
   state: string;

@@ -27,16 +27,21 @@ export class UserService {
       return { status: false };
     }
   }
-  async findAll(){
-    return await this.userModel.find()
-
+  async findAll() {
+    return await this.userModel.find();
   }
-  async updateField(id: string, fieldToUpdate: string, newValue: any): Promise<any> {
-    const updatedDoc = await this.userModel.findByIdAndUpdate(
-      id,
-      { $set: { [fieldToUpdate]: newValue } },
-      { new: true }
-    ).exec();
+  async updateField(
+    id: string,
+    fieldToUpdate: string,
+    newValue: any,
+  ): Promise<any> {
+    const updatedDoc = await this.userModel
+      .findByIdAndUpdate(
+        id,
+        { $set: { [fieldToUpdate]: newValue } },
+        { new: true },
+      )
+      .exec();
     return updatedDoc;
   }
 
@@ -79,10 +84,10 @@ export class UserService {
   //   return this.RegisterModel.findByIdAndUpdate(id, productData, { new: true });
   // }
   async findOne(email: any) {
-    console.log(email,'emailllllllllllllllll');
-    
-    
     const user = await this.userModel.findOne(email);
     return user;
+  }
+  async getUserDetails(id: any) {
+    return await this.userModel.findById(id);
   }
 }

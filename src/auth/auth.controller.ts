@@ -23,9 +23,9 @@ export class AuthController {
     const user = await this.registerService.createUser(userDto);
     console.log(user, 'user111');
     if (user.status) {
-      return { message: 'Successfully Registerd', isAdded: true };
+      return { message: 'Successfully Registered', isAdded: true };
     } else {
-      return { message: 'Email alredy exist', isAdded: false };
+      return { message: 'Email already exist', isAdded: false };
     }
   }
 
