@@ -47,12 +47,26 @@ export class ProfileController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadImage(@Req() req, @UploadedFile() file: Express.Multer.File) {
+
     const uploaded = await this.cloudinaryService.uploadFile(file);
     await this.userService.updateField(
       req.user._id,
       'profile_pic',
       uploaded.url,
     );
+    return uploaded;
+  }
+
+  @Post('upload_thumbnail')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadVideoThumbnail(@UploadedFile() file: Express.Multer.File) {
+    return await this.cloudinaryService.uploadFile(file);
+  }
+
+  @Post('upload_video')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadCourse(@UploadedFile() file: Express.Multer.File) {
+    const uploaded = await this.cloudinaryService.uploadVideo(file);
     return uploaded;
   }
 }

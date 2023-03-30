@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 // import { ClodinaryService } from './clodinary/clodinary.service';
+import { CourseModule } from './course/course.module';
 
 
 @Module({
@@ -19,11 +20,11 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     MongooseModule.forRoot(process.env.MONGO_URL),
     ProfileModule,
     AuthModule,
-    CloudinaryModule
+    CloudinaryModule,
+    CourseModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
 
-// 'mongodb+srv://ajnaskp203:8UP0Fzs4tdpX86UQ@cluster0.orlxzbx.mongodb.net/testdb?retryWrites=true&w=majority',
