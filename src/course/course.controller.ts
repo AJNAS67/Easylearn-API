@@ -10,14 +10,9 @@ export class CourseController {
 
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
-
   @Post('add-course')
   async addCourse(@Req() req,@Body() courseDto: Course,@UploadedFile() file: Express.Multer.File) {
     console.log(file,'file');
-    
-  
-
-
     console.log(courseDto, 'coyda');
     
 
@@ -30,4 +25,9 @@ export class CourseController {
   async getCourse() {
     return this._courseService.getHello();
   }
+  @Get('getCourses')
+  getAllCourse(){
+    return this._courseService.getCourses()
+  }
+
 }

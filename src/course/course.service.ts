@@ -10,8 +10,8 @@ export class CourseService {
     private readonly courseModel: Model<CourseDocument>,
   ) {}
   async addCourse(userId: any, course: Course) {
-    console.log(course,'course');
-    
+    console.log(course, 'course');
+
     try {
       return await this.courseModel.create({
         UserId: new mongoose.Types.ObjectId(userId),
@@ -27,7 +27,11 @@ export class CourseService {
       throw new BadRequestException(error.message);
     }
   }
-  getHello(){
-    return 'hi'
+
+  async getCourses() {
+    return await this.courseModel.find();
+  }
+  getHello() {
+    return 'hi';
   }
 }
