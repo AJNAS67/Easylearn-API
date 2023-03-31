@@ -8,8 +8,8 @@ import { ProfileModule } from './profile/profile.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
-// import { ClodinaryService } from './clodinary/clodinary.service';
 import { CourseModule } from './course/course.module';
+import { CartModule } from './cart/cart.module';
 
 
 @Module({
@@ -21,7 +21,8 @@ import { CourseModule } from './course/course.module';
     ProfileModule,
     AuthModule,
     CloudinaryModule,
-    CourseModule
+    CourseModule,
+    CartModule
   ],
   controllers: [AppController],
   providers: [AppService],
