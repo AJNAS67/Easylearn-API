@@ -21,7 +21,7 @@ export class CartService {
       if (courseIdExists) {
         return { message: 'Course already exists in Cart' };
       } else {
-        const data = await this.cartModel.findOneAndUpdate(
+        await this.cartModel.findOneAndUpdate(
           { userId: userId },
           {
             $push: {
