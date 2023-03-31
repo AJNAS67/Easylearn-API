@@ -28,8 +28,16 @@ export class Course {
   CourseDescription: string;
 
   @Prop()
+  Level: string;
+
+  @Prop()
+  Language: string;
+
+  @Prop()
+  Price: number;
+
+  @Prop()
   VideoModule: [{ title: string; video: string }];
-  
 
   @Prop({ default: Date.now })
   date: Date;
