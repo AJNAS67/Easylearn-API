@@ -10,7 +10,6 @@ export class CourseService {
     private readonly courseModel: Model<CourseDocument>,
   ) {}
   async addCourse(userId: any, course: Course) {
-    console.log(course, 'course');
 
     try {
       return await this.courseModel.create({
@@ -28,10 +27,10 @@ export class CourseService {
     }
   }
 
-  async getCourses() {
+  async getAllCourses() {
     return await this.courseModel.find();
   }
-  getHello() {
-    return 'hi';
+  async getCourse(id: string) {
+    return await this.courseModel.findById(id);
   }
 }
