@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { CourseModule } from './course/course.module';
 import { CartModule } from './cart/cart.module';
+import { WishlistModule } from './wishlist/wishlist.module';
 
 
 @Module({
@@ -22,7 +23,8 @@ import { CartModule } from './cart/cart.module';
     AuthModule,
     CloudinaryModule,
     CourseModule,
-    CartModule
+    CartModule,
+    WishlistModule
   ],
   controllers: [AppController],
   providers: [AppService],

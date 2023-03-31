@@ -10,7 +10,6 @@ import { CourseSchema } from './model/course.model';
     CourseModule,
   ],
   controllers: [CourseController],
-
   providers: [CourseService],
   exports: [CourseService],
 })
