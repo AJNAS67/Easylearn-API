@@ -53,4 +53,7 @@ export class CartService {
       return { message: 'Course successfully added!' };
     }
   }
+  async gatCart(userId: string) {
+    return this.cartModel.findOne({ userId });
+  }
 }

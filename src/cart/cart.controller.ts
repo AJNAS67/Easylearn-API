@@ -18,4 +18,11 @@ export class CartController {
   async courseAddToCart(@Req() req, @Body() courseId: any) {
     return await this.cartService.addToCart(req.user._id, courseId.courseId);
   }
+  
+  @UseGuards(JwtAuthGuard)
+  @Get('userCart')
+  getUserCart(@Req() req) {
+    return this.cartService.gatCart(req.user._id);
+  }
 }
+
