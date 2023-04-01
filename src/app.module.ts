@@ -11,6 +11,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { CourseModule } from './course/course.module';
 import { CartModule } from './cart/cart.module';
 import { WishlistModule } from './wishlist/wishlist.module';
+import { AdminModule } from './admin/admin.module';
 
 
 @Module({
@@ -24,7 +25,8 @@ import { WishlistModule } from './wishlist/wishlist.module';
     CloudinaryModule,
     CourseModule,
     CartModule,
-    WishlistModule
+    WishlistModule,
+    AdminModule
   ],
   controllers: [AppController],
   providers: [AppService],
