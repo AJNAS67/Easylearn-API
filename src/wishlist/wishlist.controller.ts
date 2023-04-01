@@ -1,6 +1,7 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { WishlistService } from './wishlist.service';
+import { log } from 'console';
 
 @Controller('wishlist')
 export class WishlistController {
@@ -13,5 +14,11 @@ export class WishlistController {
       req.user._id,
       courseId.courseId,
     );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('userWishlist')
+  async getUserCart(@Req() req) {
+    return await this.wishlistService.gatWishlist(req.user._id);
   }
 }

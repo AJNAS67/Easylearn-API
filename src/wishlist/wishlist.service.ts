@@ -52,4 +52,8 @@ export class WishlistService {
       return { message: 'Course successfully added!' };
     }
   }
+
+  async gatWishlist(userId: string) {
+    return await this.wishlistModel.findOne({ userId });
+  }
 }
