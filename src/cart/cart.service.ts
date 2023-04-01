@@ -56,4 +56,12 @@ export class CartService {
   async gatCart(userId: string) {
     return this.cartModel.findOne({ userId });
   }
+
+  async removeCart(userId: string, courseId: string, coursePrice: number) {
+    return await this.cartModel.updateOne(
+      { userId },
+      { $pull: { course: { courseId } }, $inc: { totalPrice: -coursePrice } },
+      { new: true },
+    );
+  }
 }
