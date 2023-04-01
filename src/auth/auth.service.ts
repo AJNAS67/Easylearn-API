@@ -35,19 +35,27 @@ export class AuthService {
   }
 
   login(user: any) {
-    
     const payload = {
       email: user.email,
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
     };
-
-    return {
-      user,
-      status: true,
-      access_token: this.jwtService.sign(payload),
-    };
+    if (user.email == process.env.ADMIN_EMAIL) {
+      return {
+        user,
+        status: true,
+        admin: true,
+        access_token: this.jwtService.sign(payload),
+      };
+    } else {
+      return {
+        user,
+        status: true,
+        admin: false,
+        access_token: this.jwtService.sign(payload),
+      };
+    }
   }
   getHello() {
     return 'Hello';
