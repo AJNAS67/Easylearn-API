@@ -56,4 +56,9 @@ export class WishlistService {
   async gatWishlist(userId: string) {
     return await this.wishlistModel.findOne({ userId });
   }
+  async removeWishlist(userId: string, courseId: string) {
+    return await this.wishlistModel
+      .updateOne({ userId }, { $pull: { course: { courseId } } })
+      .exec();
+  }
 }

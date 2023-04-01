@@ -9,11 +9,10 @@ import { Request } from 'express';
 
 @Controller('')
 export class AuthController {
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private registerService: UserService,
-    
-    ) {}
-
+  ) {}
 
   @Post('register')
   async RegisterUser(@Body() userDto: User) {
@@ -29,8 +28,6 @@ export class AuthController {
     }
   }
 
-
-
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Req() req: Request) {
@@ -41,16 +38,11 @@ export class AuthController {
   @Get('protected')
   checkAuth(@Req() req: Request) {
     const token = req.headers.authorization.split(' ')[1];
-    console.log(req.user,'req.user');
-    
     return { user: req.user, token: token };
   }
-  
 
   @Get('pro')
-  async GetHello(){
-    return this.authService.getHello()
-
+  async GetHello() {
+    return this.authService.getHello();
   }
-  
 }
