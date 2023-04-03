@@ -10,7 +10,6 @@ export class CourseService {
     private readonly courseModel: Model<CourseDocument>,
   ) {}
   async addCourse(userId: any, course: Course) {
-
     try {
       return await this.courseModel.create({
         UserId: new mongoose.Types.ObjectId(userId),
@@ -21,6 +20,9 @@ export class CourseService {
         ThumbnailImage: course.ThumbnailImage,
         CourseDescription: course.CourseDescription,
         VideoModule: course.VideoModule,
+        Level: course.Level,
+        Language: course.Language,
+        Price: course.Price,
       });
     } catch (error) {
       throw new BadRequestException(error.message);

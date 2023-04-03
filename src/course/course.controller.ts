@@ -25,14 +25,8 @@ export class CourseController {
   async addCourse(
     @Req() req,
     @Body() courseDto: Course,
-    @UploadedFile() file: Express.Multer.File,
   ) {
-    console.log(file, 'file');
-    console.log(courseDto, 'coyda');
-
     const course = await this._courseService.addCourse(req.user._id, courseDto);
-    console.log(course, 'sdsdd');
-
     return course;
   }
 
