@@ -28,6 +28,7 @@ export class CartService {
               course: {
                 courseId: courseId,
                 courseName: getCourse.CourseName,
+                image:getCourse.ThumbnailImage,
                 price: getCourse.Price,
               },
             },
@@ -45,6 +46,8 @@ export class CartService {
             courseId: courseId,
             courseName: getCourse.CourseName,
             price: getCourse.Price,
+            image:getCourse.ThumbnailImage,
+
           },
         ],
         totalPrice: getCourse.Price,

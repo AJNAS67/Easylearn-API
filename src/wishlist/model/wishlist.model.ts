@@ -16,6 +16,7 @@ export class Wishlist {
       courseId: mongoose.Types.ObjectId;
       courseName: String;
       price: number;
+      image: string;
     },
   ];
 }

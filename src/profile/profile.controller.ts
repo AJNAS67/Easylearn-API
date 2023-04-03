@@ -20,7 +20,7 @@ import { UserService } from 'src/user/user.service';
 export class ProfileController {
   constructor(
     private profileService: ProfileService,
-    private readonly cloudinaryService: CloudinaryService,
+    private readonly _cloudinaryService: CloudinaryService,
     private userService: UserService,
   ) {}
 
@@ -47,8 +47,7 @@ export class ProfileController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadImage(@Req() req, @UploadedFile() file: Express.Multer.File) {
-
-    const uploaded = await this.cloudinaryService.uploadFile(file);
+    const uploaded = await this._cloudinaryService.uploadFile(file);
     await this.userService.updateField(
       req.user._id,
       'profile_pic',
@@ -56,17 +55,23 @@ export class ProfileController {
     );
     return uploaded;
   }
+  @Post('courseImage')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadThumbnailImage(@UploadedFile() file: Express.Multer.File) {
+    const uploaded = await this._cloudinaryService.uploadFile(file);
+    return uploaded;
+  }
 
   @Post('upload_thumbnail')
   @UseInterceptors(FileInterceptor('file'))
   async uploadVideoThumbnail(@UploadedFile() file: Express.Multer.File) {
-    return await this.cloudinaryService.uploadFile(file);
+    return await this._cloudinaryService.uploadFile(file);
   }
 
   @Post('upload_video')
   @UseInterceptors(FileInterceptor('file'))
   async uploadCourse(@UploadedFile() file: Express.Multer.File) {
-    const uploaded = await this.cloudinaryService.uploadVideo(file);
+    const uploaded = await this._cloudinaryService.uploadVideo(file);
     return uploaded;
   }
 }

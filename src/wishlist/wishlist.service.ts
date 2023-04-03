@@ -30,6 +30,7 @@ export class WishlistService {
                 courseId: courseId,
                 courseName: getCourse.CourseName,
                 price: getCourse.Price,
+                image: getCourse.ThumbnailImage,
               },
             },
           },
@@ -45,6 +46,7 @@ export class WishlistService {
             courseId: courseId,
             courseName: getCourse.CourseName,
             price: getCourse.Price,
+            image: getCourse.ThumbnailImage,
           },
         ],
       });
