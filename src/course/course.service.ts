@@ -35,4 +35,9 @@ export class CourseService {
   async getCourse(id: string) {
     return await this.courseModel.findById(id);
   }
+  async findMentorCourse(userId: string) {
+    return await this.courseModel.find({
+      UserId: new mongoose.Types.ObjectId(userId),
+    });
+  }
 }

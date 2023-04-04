@@ -22,10 +22,7 @@ export class CourseController {
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   @Post('add-course')
-  async addCourse(
-    @Req() req,
-    @Body() courseDto: Course,
-  ) {
+  async addCourse(@Req() req, @Body() courseDto: Course) {
     const course = await this._courseService.addCourse(req.user._id, courseDto);
     return course;
   }
@@ -37,5 +34,11 @@ export class CourseController {
   @Get('course/:id')
   getCourse(@Param('id') id: string): Promise<CourseDocument> {
     return this._courseService.getCourse(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('mentor_course')
+  getMentorCourse(@Req() req) {
+    return this._courseService.findMentorCourse(req.user._id);
   }
 }
