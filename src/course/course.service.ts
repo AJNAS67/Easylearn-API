@@ -33,7 +33,6 @@ export class CourseService {
     }
   }
 
-
   async findMentorCourse(userId: string) {
     return await this.courseModel.find({
       UserId: new mongoose.Types.ObjectId(userId),
@@ -57,5 +56,15 @@ export class CourseService {
   }
   async findPopular() {
     return await this.courseModel.find({ Popularity: true }).exec();
+  }
+  async findML_Ai() {
+    return await this.courseModel.find({ AI_and_ML: true }).exec();
+  }
+  async findCategoryBasedCourse(id: string) {
+    try {
+      return await this.courseModel.find({ Category: id });
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

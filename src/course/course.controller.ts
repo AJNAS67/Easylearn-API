@@ -59,4 +59,12 @@ export class CourseController {
   async getPopularity() {
     return await this._courseService.findPopular();
   }
+  @Get('ml_courses')
+  async getMlCourses() {
+    return await this._courseService.findML_Ai();
+  }
+  @Get('category_course/:id')
+  async getCategoryCourse(@Param('id') id: string) {
+    return await this._courseService.findCategoryBasedCourse(id)
+  }
 }
