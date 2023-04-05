@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Category } from 'src/category/model/category.model';
 import { User } from 'src/user/model/user.models';
 
 export type CourseDocument = HydratedDocument<Course>;
@@ -15,8 +16,8 @@ export class Course {
   @Prop()
   MentorName: string;
 
-  @Prop()
-  Category: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Category.name })
+  Category: Category;
 
   @Prop()
   TotalHr: number;
@@ -38,6 +39,18 @@ export class Course {
 
   @Prop()
   VideoModule: [{ title: string; video: string }];
+
+  @Prop()
+  Popularity: boolean;
+
+  @Prop()
+  Trending: boolean;
+
+  @Prop()
+  Featured: boolean;
+
+  @Prop()
+  AI_and_ML: boolean;
 
   @Prop({ default: Date.now })
   date: Date;

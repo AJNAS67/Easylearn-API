@@ -23,18 +23,17 @@ export class CourseService {
         Level: course.Level,
         Language: course.Language,
         Price: course.Price,
+        Popularity: course.Popularity,
+        Trending: course.Trending,
+        Featured: course.Featured,
+        AI_and_ML: course.AI_and_ML,
       });
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  async getAllCourses() {
-    return await this.courseModel.find();
-  }
-  async getCourse(id: string) {
-    return await this.courseModel.findById(id);
-  }
+
   async findMentorCourse(userId: string) {
     return await this.courseModel.find({
       UserId: new mongoose.Types.ObjectId(userId),
@@ -42,6 +41,21 @@ export class CourseService {
   }
   async removeCourse(courseId: string) {
     console.log(courseId);
-    return await this.courseModel.deleteOne({ _id:courseId });
+    return await this.courseModel.deleteOne({ _id: courseId });
+  }
+  async getCourse(id: string) {
+    return await this.courseModel.findById(id);
+  }
+  async getAllCourses() {
+    return await this.courseModel.find().populate('Category').exec();
+  }
+  async findTrending() {
+    return await this.courseModel.find({ Trending: true }).exec();
+  }
+  async findFeature() {
+    return await this.courseModel.find({ Featured: true }).exec();
+  }
+  async findPopular() {
+    return await this.courseModel.find({ Popularity: true }).exec();
   }
 }

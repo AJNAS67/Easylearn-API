@@ -43,8 +43,20 @@ export class CourseController {
     return this._courseService.findMentorCourse(req.user._id);
   }
   @Delete('deleteCourse/:id')
- async  deleteCourse(@Param('id') courseId: string){
-  return await this._courseService.removeCourse(courseId)
+  async deleteCourse(@Param('id') courseId: string) {
+    return await this._courseService.removeCourse(courseId);
+  }
 
+  @Get('trending_courses')
+  async getTrending() {
+    return await this._courseService.findTrending();
+  }
+  @Get('featured_courses')
+  async getFeatured() {
+    return await this._courseService.findFeature();
+  }
+  @Get('popular_courses')
+  async getPopularity() {
+    return await this._courseService.findPopular();
   }
 }
