@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -40,5 +41,10 @@ export class CourseController {
   @Get('mentor_course')
   getMentorCourse(@Req() req) {
     return this._courseService.findMentorCourse(req.user._id);
+  }
+  @Delete('deleteCourse/:id')
+ async  deleteCourse(@Param('id') courseId: string){
+  return await this._courseService.removeCourse(courseId)
+
   }
 }

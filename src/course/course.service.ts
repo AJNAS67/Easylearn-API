@@ -40,4 +40,8 @@ export class CourseService {
       UserId: new mongoose.Types.ObjectId(userId),
     });
   }
+  async removeCourse(courseId: string) {
+    console.log(courseId);
+    return await this.courseModel.deleteOne({ _id:courseId });
+  }
 }

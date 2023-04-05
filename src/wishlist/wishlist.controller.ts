@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { WishlistService } from './wishlist.service';
-import { log } from 'console';
 
 @Controller('wishlist')
 export class WishlistController {
