@@ -26,9 +26,9 @@ export class CartService {
           {
             $push: {
               course: {
-                courseId: courseId,
+                courseId: new mongoose.Types.ObjectId(courseId),
                 courseName: getCourse.CourseName,
-                image:getCourse.ThumbnailImage,
+                image: getCourse.ThumbnailImage,
                 price: getCourse.Price,
               },
             },
@@ -43,11 +43,10 @@ export class CartService {
         userId,
         course: [
           {
-            courseId: courseId,
+            courseId: new mongoose.Types.ObjectId(courseId),
             courseName: getCourse.CourseName,
             price: getCourse.Price,
-            image:getCourse.ThumbnailImage,
-
+            image: getCourse.ThumbnailImage,
           },
         ],
         totalPrice: getCourse.Price,
@@ -60,11 +59,15 @@ export class CartService {
     return this.cartModel.findOne({ userId });
   }
 
-  async removeCart(userId: string, courseId: string, coursePrice: number) {
-    return await this.cartModel.updateOne(
+  async removeCart(userId: string, courseId1: string, coursePrice: number) {
+    let courseId = new mongoose.Types.ObjectId(courseId1);
+    return await this.cartModel.findOneAndUpdate(
       { userId },
       { $pull: { course: { courseId } }, $inc: { totalPrice: -coursePrice } },
       { new: true },
     );
+  }
+  deleteCart( userId: string) {
+    return this.cartModel.deleteOne({userId:userId});
   }
 }

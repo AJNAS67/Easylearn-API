@@ -13,6 +13,7 @@ import { CartModule } from './cart/cart.module';
 import { WishlistModule } from './wishlist/wishlist.module';
 import { AdminModule } from './admin/admin.module';
 import { CategoryModule } from './category/category.module';
+import { EnrolledCourseModule } from './enrolled-course/enrolled-course.module';
 
 
 @Module({
@@ -28,7 +29,8 @@ import { CategoryModule } from './category/category.module';
     CartModule,
     WishlistModule,
     AdminModule,
-    CategoryModule
+    CategoryModule,
+    EnrolledCourseModule
   ],
   controllers: [AppController],
   providers: [AppService],
