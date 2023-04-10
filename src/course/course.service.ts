@@ -6,7 +6,7 @@ import { Course, CourseDocument } from './model/course.model';
 @Injectable()
 export class CourseService {
   constructor(
-    @InjectModel('course')
+    @InjectModel('Course')
     private readonly courseModel: Model<CourseDocument>,
   ) {}
   async addCourse(userId: any, course: Course) {

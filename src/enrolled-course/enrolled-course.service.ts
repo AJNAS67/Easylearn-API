@@ -5,6 +5,7 @@ import {
   EnrolledCourseDocument,
 } from './model/enrolled-course.model';
 import mongoose, { Model } from 'mongoose';
+import { Course } from 'src/course/model/course.model';
 
 @Injectable()
 export class EnrolledCourseService {
@@ -13,16 +14,34 @@ export class EnrolledCourseService {
     private readonly enrolledCourseModel: Model<EnrolledCourseDocument>,
   ) {}
   async enrollCourse(userId: string, enrolledDto: EnrolledCourse) {
-    
     try {
-      return await this.enrolledCourseModel.create({
+      const course1 = enrolledDto.course.map((course) => {
+        return {
+          ...course,
+          courseId: new mongoose.Types.ObjectId(course.courseId),
+        };
+      });
+
+      await this.enrolledCourseModel.create({
         userId: new mongoose.Types.ObjectId(userId),
-        course: enrolledDto.course,
+        course: course1,
         totalPrice: enrolledDto.totalPrice,
         paymentStatus: true,
       });
+
+      return {
+        message: 'Payment successfully complected',
+        paymentStatus: true,
+      };
     } catch (error) {
       throw new BadRequestException(error.message);
     }
+  }
+  async getEnrolledCourse(userId: string) {
+    return await this.enrolledCourseModel
+      .find({
+        userId: new mongoose.Types.ObjectId(userId),
+      })
+      .populate({ path: 'course.courseId', model: Course.name });
   }
 }

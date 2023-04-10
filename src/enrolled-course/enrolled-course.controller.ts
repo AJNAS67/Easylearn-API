@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { EnrolledCourseService } from './enrolled-course.service';
 import { EnrolledCourse } from './model/enrolled-course.model';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
@@ -18,7 +18,13 @@ export class EnrolledCourseController {
       req.user._id,
       enrolledDto,
     );
-   const deleteCart= await this.cartService.deleteCart(req.user._id);
+    await this.cartService.deleteCart(req.user._id);
     return order;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('get_enrolled_course')
+  async getEnrolledCourse(@Req() req) {
+    return await this._enrolledCourse.getEnrolledCourse(req.user._id);
   }
 }

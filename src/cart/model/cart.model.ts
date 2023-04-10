@@ -14,7 +14,7 @@ export class Cart {
   course: [
     {
       courseId: mongoose.Types.ObjectId;
-      courseName: String;
+      courseName: string;
       price: number;
       image:string;
     },

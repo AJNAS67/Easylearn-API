@@ -6,7 +6,7 @@ import { CourseSchema } from './model/course.model';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'course', schema: CourseSchema }]),
+    MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
     CourseModule,
   ],
   controllers: [CourseController],
