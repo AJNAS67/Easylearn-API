@@ -90,4 +90,7 @@ export class UserService {
   async getUserDetails(id: any) {
     return await this.userModel.findById(id);
   }
+  async getAllAdmin() {
+    return await this.userModel.find({ isAdmin: true });
+  }
 }

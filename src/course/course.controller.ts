@@ -41,6 +41,11 @@ export class CourseController {
   getMentorCourse(@Req() req) {
     return this._courseService.findMentorCourse(req.user._id);
   }
+  // @Get('course/:id')
+  // getSubscribedCourse(@Param('id') id: string) {
+  //   return this._courseService.subscribedCourse(id);
+  // }
+
   @Delete('deleteCourse/:id')
   async deleteCourse(@Param('id') courseId: string) {
     return await this._courseService.removeCourse(courseId);

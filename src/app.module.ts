@@ -14,6 +14,7 @@ import { WishlistModule } from './wishlist/wishlist.module';
 import { AdminModule } from './admin/admin.module';
 import { CategoryModule } from './category/category.module';
 import { EnrolledCourseModule } from './enrolled-course/enrolled-course.module';
+import { ChatModule } from './chat/chat.module';
 
 
 @Module({
@@ -30,7 +31,8 @@ import { EnrolledCourseModule } from './enrolled-course/enrolled-course.module';
     WishlistModule,
     AdminModule,
     CategoryModule,
-    EnrolledCourseModule
+    EnrolledCourseModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

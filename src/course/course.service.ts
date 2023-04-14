@@ -67,4 +67,8 @@ export class CourseService {
       throw new BadRequestException(error.message);
     }
   }
+  // async subscribedCourse(courseId:string){
+  //   return this.courseModel.findById()
+
+  // }
 }

@@ -22,6 +22,12 @@ export class User {
   
   @Prop()
   profile_pic: string;
+
+  @Prop({ default: false })
+  isBlock: boolean;
+
+  @Prop({ default: false })
+  isAdmin: boolean;
   
   @Prop({ default: Date.now })
   date: Date;

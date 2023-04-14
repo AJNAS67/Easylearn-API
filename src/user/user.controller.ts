@@ -77,4 +77,9 @@ export class UserController {
   // async update(@Param('id') id: string, @Body() productData: userUpdate): Promise<any> {
   //   return this.registerService.update(id, productData);
   // }
+
+  @Get('isAdmin')
+  async getAllAdmin(){
+    return this.registerService.getAllAdmin()
+  }
 }
