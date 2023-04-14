@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { CourseService } from 'src/course/course.service';
 @Controller('admin')
@@ -16,5 +16,10 @@ export class AdminController {
   @Get('courses')
   getAllCourses() {
     return this.courseService.getAllCourses();
+  }
+
+  @Patch('changeAdminStatus/:id')
+  changeIsAdmin(@Param('id') id: string, @Body() isAdmin: {isAdmin:boolean}) {
+    return this.userService.updateUserAdminStatus(id,isAdmin.isAdmin)
   }
 }
