@@ -94,12 +94,15 @@ export class UserService {
     return await this.userModel.find({ isAdmin: true });
   }
   async updateUserAdminStatus(userId: string, isAdmin: boolean): Promise<User> {
-    const updatedUser = await this.userModel
+    return await this.userModel
       .findOneAndUpdate({ _id: userId }, { isAdmin }, { new: true })
       .exec();
-      console.log(updatedUser,'updated User');
-      
-
-    return updatedUser;
+  }
+  async updateUserBlockStatus(userId: string, isBlock: boolean): Promise<User> {
+    return await this.userModel.findByIdAndUpdate(
+      { _id: userId },
+      { isBlock },
+      { new: true },
+    );
   }
 }

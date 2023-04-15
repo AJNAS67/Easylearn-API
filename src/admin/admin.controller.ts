@@ -19,7 +19,17 @@ export class AdminController {
   }
 
   @Patch('changeAdminStatus/:id')
-  changeIsAdmin(@Param('id') id: string, @Body() isAdmin: {isAdmin:boolean}) {
-    return this.userService.updateUserAdminStatus(id,isAdmin.isAdmin)
+  changeIsAdmin(
+    @Param('id') id: string,
+    @Body() isAdmin: { isAdmin: boolean },
+  ) {
+    return this.userService.updateUserAdminStatus(id, isAdmin.isAdmin);
+  }
+  @Patch('changeBlockStatus/:id')
+  changeIsBlock(
+    @Param('id') id: string,
+    @Body() isBlock: { isBlock: boolean },
+  ) {
+    return this.userService.updateUserBlockStatus(id, isBlock.isBlock);
   }
 }

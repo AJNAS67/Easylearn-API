@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Req,
@@ -33,7 +34,11 @@ export class CourseController {
   }
   @Get('course/:id')
   getCourse(@Param('id') id: string): Promise<CourseDocument> {
-    return this._courseService.getCourse(id);
+    try {
+      return this._courseService.getCourse(id);
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 
   @UseGuards(JwtAuthGuard)
@@ -69,6 +74,6 @@ export class CourseController {
   }
   @Get('category_course/:id')
   async getCategoryCourse(@Param('id') id: string) {
-    return await this._courseService.findCategoryBasedCourse(id)
+    return await this._courseService.findCategoryBasedCourse(id);
   }
 }
