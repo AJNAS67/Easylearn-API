@@ -3,9 +3,6 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User, UserDocument } from 'src/user/model/user.models';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -20,15 +17,14 @@ export class AuthService {
   async validateUser(email: any, password: any) {
     const user = await this.userService.findUser({ email });
 
-
     if (user === null) {
-      throw new BadRequestException(`couldn't find user`);
+      throw new BadRequestException(`Couldn't find email !! please register`);
     } else {
       const check = await bcrypt.compare(password, user.password);
       if (check) {
         return user;
       } else {
-        throw new UnauthorizedException('Password or username is invalid');
+        throw new UnauthorizedException('Wrong Password !!');
       }
     }
   }
