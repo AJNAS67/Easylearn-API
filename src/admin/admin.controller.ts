@@ -12,6 +12,10 @@ export class AdminController {
   getAllUsers() {
     return this.userService.findAll();
   }
+  @Get('students')
+  getStudents(){
+    return this.userService.findStudents()
+  }
 
   @Get('courses')
   getAllCourses() {

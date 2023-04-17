@@ -7,11 +7,11 @@ import {
   UseGuards,
   UploadedFile,
   UseInterceptors,
+  Put,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { Profile } from './model/profile.model';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
-import { Request } from 'express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UserService } from 'src/user/user.service';
@@ -41,6 +41,16 @@ export class ProfileController {
     );
 
     return { userDetails };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('update_profile')
+  async updateUser(@Req() req, @Body() profileDto: Profile) {
+    const user = await this.profileService.uploadProfile(
+      profileDto,
+      req.user._id,
+    );
+    return { user };
   }
 
   @UseGuards(JwtAuthGuard)

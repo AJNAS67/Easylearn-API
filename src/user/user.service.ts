@@ -23,6 +23,10 @@ export class UserService {
   async findAll() {
     return await this.userModel.find();
   }
+  async findStudents(){
+    return await this.userModel.find({ isAdmin: false });
+    
+  }
   async updateField(
     id: string,
     fieldToUpdate: string,
@@ -61,10 +65,8 @@ export class UserService {
       .exec();
   }
   async updateUserBlockStatus(userId: string, isBlock: boolean): Promise<User> {
-    return await this.userModel.findByIdAndUpdate(
-      { _id: userId },
-      { isBlock },
-      { new: true },
-    );
+    return await this.userModel
+      .findOneAndUpdate({ _id: userId }, { isBlock }, { new: true })
+      .exec();
   }
 }

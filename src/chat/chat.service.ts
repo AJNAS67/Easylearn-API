@@ -18,7 +18,6 @@ export class ChatService {
     });
   }
   async getChats(senderId: string, receiverId: string) {
-    //  return this.chatModel.find({sender:senderId})
 
     console.log(senderId, 'sendrID');
     console.log(receiverId, 'sendrID');
@@ -35,7 +34,6 @@ export class ChatService {
           },
         ],
       })
-    console.log(chat, 'caht');
     return chat;
   }
 }

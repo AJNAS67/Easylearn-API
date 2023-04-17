@@ -34,11 +34,7 @@ export class CourseController {
   }
   @Get('course/:id')
   getCourse(@Param('id') id: string): Promise<CourseDocument> {
-    try {
-      return this._courseService.getCourse(id);
-    } catch (error) {
-      throw new NotFoundException();
-    }
+    return this._courseService.getCourse(id);
   }
 
   @UseGuards(JwtAuthGuard)

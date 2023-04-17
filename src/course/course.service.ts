@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { Course, CourseDocument } from './model/course.model';
@@ -43,7 +47,13 @@ export class CourseService {
     return await this.courseModel.deleteOne({ _id: courseId });
   }
   async getCourse(id: string) {
-    return await this.courseModel.findById(id);
+    try {
+      return await this.courseModel.findById(id);
+    } catch (error) {
+      console.log(error.message);
+      
+      throw new NotFoundException('Sorry ! Course temporary unavailable');
+    }
   }
   async getAllCourses() {
     return await this.courseModel.find().populate('Category').exec();

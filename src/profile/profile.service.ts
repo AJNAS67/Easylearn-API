@@ -9,23 +9,27 @@ export class ProfileService {
     @InjectModel('profile')
     private readonly profileModel: Model<ProfileDocument>,
   ) {}
-  async UserDetails(userDetals: Profile, id: any) {
+  async UserDetails(userDetails: Profile, id: string) {
     try {
       return await this.profileModel.create({
         userId: new mongoose.Types.ObjectId(id),
-        fullName: userDetals.fullName,
-        email: userDetals.email,
-        pinCode: userDetals.pinCode,
-        phoneNumber: userDetals.phoneNumber,
-        dateofBirth: userDetals.dateofBirth,
-        state: userDetals.state,
-        district: userDetals.district,
-        city: userDetals.city,
-        address: userDetals.address,
+        fullName: userDetails.fullName,
+        email: userDetails.email,
+        pinCode: userDetails.pinCode,
+        phoneNumber: userDetails.phoneNumber,
+        dateofBirth: userDetails.dateofBirth,
+        state: userDetails.state,
+        district: userDetails.district,
+        city: userDetails.city,
+        address: userDetails.address,
       });
     } catch (error) {
       throw new BadRequestException(error.message);
     }
+  }
+  async uploadProfile(userDetails: Profile, id1: any) {
+    let id = new mongoose.Types.ObjectId(id1);
+    return await this.profileModel.findOneAndUpdate({ id }, userDetails);
   }
   async getUserDetails(id: string) {
     return await this.profileModel.find({
