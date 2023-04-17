@@ -12,7 +12,15 @@ export interface userUpdate {
   email: string;
   phoneNumber: number;
 }
-export interface userLogin{
+export interface userLogin {
   email: string;
   password: string;
+}
+export interface payloadInterface {
+  email: string;
+  _id: string;
+  firstName: string;
+  lastName: string;
+  iat: number;
+  exp: number;
 }

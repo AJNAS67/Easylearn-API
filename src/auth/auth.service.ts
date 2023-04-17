@@ -19,11 +19,10 @@ export class AuthService {
 
   async validateUser(email: any, password: any) {
     const user = await this.userService.findUser({ email });
-    console.log(user, 'user');
-    // return user
+
 
     if (user === null) {
-      throw new BadRequestException('Couldnt find user');
+      throw new BadRequestException(`couldn't find user`);
     } else {
       const check = await bcrypt.compare(password, user.password);
       if (check) {
