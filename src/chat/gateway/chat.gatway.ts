@@ -13,17 +13,17 @@ import { OnModuleInit } from '@nestjs/common';
   cors: { origin: [jwtConstants.CLIENT_URL] },
   namespace: '/chat',
 })
-export class ChatGateway implements OnModuleInit {
+export class ChatGateway {
   @WebSocketServer()
   server: Server;
 
   constructor(private _chatService: ChatService) {}
-  onModuleInit() {
-    this.server.on('connection', (socket) => {
-      console.log(socket.id);
-      console.log('connected');
-    });
-  }
+  // onModuleInit() {
+  //   this.server.on('connection', (socket) => {
+  //     console.log(socket.id);
+  //     console.log('connected');
+  //   });
+  // }
 
   @SubscribeMessage('sendMessage')
   handleEvent(@MessageBody() body: any, socket: Socket) {
