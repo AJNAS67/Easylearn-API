@@ -6,6 +6,7 @@ import {
   NotFoundException,
   Param,
   Post,
+  Put,
   Req,
   UseGuards,
   UseInterceptors,
@@ -28,6 +29,15 @@ export class CourseController {
     return course;
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Put('edit-course')
+  async editCourse(@Req() req, @Body() courseDto: Course) {
+  const course = await this._courseService.editCourse(req.user._id, courseDto);
+  console.log(course,'course');
+  
+  return course;
+  }
+
   @Get('getCourses')
   getAllCourse() {
     return this._courseService.getAllCourses();
@@ -42,10 +52,7 @@ export class CourseController {
   getMentorCourse(@Req() req) {
     return this._courseService.findMentorCourse(req.user._id);
   }
-  // @Get('course/:id')
-  // getSubscribedCourse(@Param('id') id: string) {
-  //   return this._courseService.subscribedCourse(id);
-  // }
+  
 
   @Delete('deleteCourse/:id')
   async deleteCourse(@Param('id') courseId: string) {

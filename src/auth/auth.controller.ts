@@ -18,9 +18,7 @@ export class AuthController {
   async RegisterUser(@Body() userDto: User) {
     const hashedPassword = await bcrypt.hash(userDto.password, 12);
     userDto.password = hashedPassword;
-
     const user = await this.registerService.createUser(userDto);
-    console.log(user, 'user111');
     if (user.status) {
       return { message: 'Successfully Registered', isAdded: true };
     } else {

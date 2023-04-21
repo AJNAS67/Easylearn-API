@@ -51,7 +51,7 @@ export class CourseService {
       return await this.courseModel.findById(id);
     } catch (error) {
       console.log(error.message);
-      
+
       throw new NotFoundException('Sorry ! Course temporary unavailable');
     }
   }
@@ -77,8 +77,9 @@ export class CourseService {
       throw new BadRequestException(error.message);
     }
   }
-  // async subscribedCourse(courseId:string){
-  //   return this.courseModel.findById()
-
-  // }
+  
+  async editCourse(courseId: string, course: Course) {
+    let id = new mongoose.Types.ObjectId(courseId);
+    return await this.courseModel.findOneAndUpdate({ id }, course);
+  }
 }
