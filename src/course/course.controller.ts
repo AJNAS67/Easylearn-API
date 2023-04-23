@@ -29,13 +29,10 @@ export class CourseController {
     return course;
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Put('edit-course')
-  async editCourse(@Req() req, @Body() courseDto: Course) {
-  const course = await this._courseService.editCourse(req.user._id, courseDto);
-  console.log(course,'course');
-  
-  return course;
+  @Put('edit-course/:id')
+  async editCourse(@Param('id') id: string, @Body() courseDto: Course) {
+    
+  return await this._courseService.editCourse(id, courseDto);
   }
 
   @Get('getCourses')

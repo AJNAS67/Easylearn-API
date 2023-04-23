@@ -77,9 +77,10 @@ export class CourseService {
       throw new BadRequestException(error.message);
     }
   }
-  
+
   async editCourse(courseId: string, course: Course) {
     let id = new mongoose.Types.ObjectId(courseId);
-    return await this.courseModel.findOneAndUpdate({ id }, course);
+    return await this.courseModel.updateOne({ _id: id }, course);
+
   }
 }
