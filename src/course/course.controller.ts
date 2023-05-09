@@ -76,4 +76,8 @@ export class CourseController {
   async getCategoryCourse(@Param('id') id: string) {
     return await this._courseService.findCategoryBasedCourse(id);
   }
+  @Get('total_course')
+  async getTotalCourse(){
+    return await this._courseService.countCourse()
+  }
 }

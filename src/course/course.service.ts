@@ -83,4 +83,7 @@ export class CourseService {
     return await this.courseModel.updateOne({ _id: id }, course);
 
   }
+  async countCourse(){
+    return await this.courseModel.countDocuments()
+  }
 }

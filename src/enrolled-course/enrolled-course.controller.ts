@@ -27,4 +27,12 @@ export class EnrolledCourseController {
   async getEnrolledCourse(@Req() req) {
     return await this._enrolledCourse.getEnrolledCourse(req.user._id);
   }
+  @Get('get_total')
+  async findTotal() {
+    return this._enrolledCourse.findTotalPrice();
+  }
+  @Get('all_order')
+  async getAllOrder() {
+    return this._enrolledCourse.getAllOrder();
+  }
 }

@@ -79,7 +79,15 @@ export class UserController {
   // }
 
   @Get('isAdmin')
-  async getAllAdmin(){
-    return this.registerService.getAllAdmin()
+  async getAllAdmin() {
+    return this.registerService.getAllAdmin();
+  }
+  @Get('get_numberOf_User')
+  async getNumberOfUsers() {
+    return this.registerService.getUserCount();
+  }
+  @Get('get_numberOf_mentor')
+  async getNumberOfMentor() {
+    return this.registerService.getNumberOfMentor();
   }
 }

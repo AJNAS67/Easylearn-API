@@ -44,4 +44,20 @@ export class EnrolledCourseService {
       })
       .populate({ path: 'course.courseId', model: Course.name });
   }
+
+  async findTotalPrice() {
+    const enrolledCourse = await this.enrolledCourseModel.find().exec();
+    // enrolledCourse.reduce((acc,cur)=>
+    //   acc+cur.totalPrice;
+    // )
+    const totalPrice = enrolledCourse.reduce(
+      (sum, product) => sum + product.totalPrice,
+      0,
+    );
+
+    return totalPrice;
+  }
+  async getAllOrder() {
+    return await this.enrolledCourseModel.find().exec();
+  }
 }

@@ -23,9 +23,8 @@ export class UserService {
   async findAll() {
     return await this.userModel.find();
   }
-  async findStudents(){
+  async findStudents() {
     return await this.userModel.find({ isAdmin: false });
-    
   }
   async updateField(
     id: string,
@@ -68,5 +67,11 @@ export class UserService {
     return await this.userModel
       .findOneAndUpdate({ _id: userId }, { isBlock }, { new: true })
       .exec();
+  }
+  async getUserCount() {
+    return await this.userModel.countDocuments();
+  }
+  async getNumberOfMentor() {
+    return await this.userModel.countDocuments({ isAdmin: true });
   }
 }
