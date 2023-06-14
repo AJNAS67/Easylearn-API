@@ -80,10 +80,13 @@ export class CourseService {
 
   async editCourse(courseId: string, course: Course) {
     let id = new mongoose.Types.ObjectId(courseId);
-    return await this.courseModel.updateOne({ _id: id }, course);
-
+    return await this.courseModel.findOneAndUpdate(
+      { _id: id },
+      { $set: course },
+      { new: true },
+    );
   }
-  async countCourse(){
-    return await this.courseModel.countDocuments()
+  async countCourse() {
+    return await this.courseModel.countDocuments();
   }
 }

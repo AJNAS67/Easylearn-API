@@ -27,9 +27,15 @@ export class ProfileService {
       throw new BadRequestException(error.message);
     }
   }
-  async uploadProfile(userDetails: Profile, id1: any) {
-    let id = new mongoose.Types.ObjectId(id1);
-    return await this.profileModel.findOneAndUpdate({ id }, userDetails);
+  async uploadProfile(userDetails: Profile, id: string) {
+    let userId = new mongoose.Types.ObjectId(id);
+    return await this.profileModel.findOneAndUpdate(
+      { userId },
+      { $set: userDetails },
+      {
+        new: true,
+      },
+    );
   }
   async getUserDetails(id: string) {
     return await this.profileModel.find({
